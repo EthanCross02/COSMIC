@@ -1,6 +1,8 @@
-'''
+"""
 This script will be used to update the Raspberry Pi using crontab
-'''
+
+THIS PROCESS IS CRUCIAL, PLEASE DO NOT EDIT WITHOUT TALKING TO ETHAN
+"""
 
 import subprocess
 import os
