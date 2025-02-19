@@ -1,2 +1,5 @@
 # COSMIC
-Repo used for all coding involving the COSMIC project
+Repo used for all coding involving the COSMIC project.
+
+# Abstract:
+This project is an entry to the COSMIC Capstone Challenge (C3), where students design a conceptual payload to advance the nation's In-space Servicing, Assembly, and Manufacturing (ISAM) capabilities. The challenge requires participants to "design a payload, to be hosted about the BCT X-Sat Venus Class bus, that will demonstrate a chain of 3 or more operations that provide an on-orbit, autonomous ISAM capability." Through trade studies and research, our team identified the need for autonomous truss assembly to enable scalable, hands-off construction of space structures, enhancing mission flexibility. In response, we propose a robotic system that autonomously assembles modular trusses using thermoplastic induction welding. The robot employs a novel locomotion method, pivoting around truss nodes to navigate and construct efficiently. This system reduces reliance on crewed intervention, enabling the rapid deployment of large-scale orbital structures and paving the way for the future of mankind’s space exploration.
