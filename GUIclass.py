@@ -28,7 +28,7 @@ class GUI(tk.Tk):
         self.rowconfigure(0, weight=3)
         self.rowconfigure(1, weight=3)
 
-    def frame_input(self, frame1, frame2):
+    def frame_input(self, frame1, frame2, frame3):
         """
         This method adds the button frames created in main.py.
         This could be built dynamically, but for now hard-code is fine
@@ -36,9 +36,51 @@ class GUI(tk.Tk):
         frame1.grid(row=0, column=0, sticky=tk.W + tk.E, padx=5, pady=5)
         frame2.grid(row=0, column=2, sticky=tk.W + tk.E, padx=5, pady=5)
 
+        frame3.grid(row=1, column=1, sticky=tk.W + tk.E, padx=5, pady=5)
+
+
     def start(self):
         """This method allows the starting of the GUI whenever construction is complete"""
         self.mainloop()
+
+class MagFrame(tk.Frame):
+    """
+    This class is used to construct the frame for the magazine control
+    """
+    def __init__(self, master, label_servo, label_screw):
+        super().__init__(master) #call parent constructor
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=1)
+        self.rowconfigure(3, weight=1)
+
+        #creating labels for the servo control and screw control
+        self.servo_label = tk.Label(self, text=label_servo)
+        self.servo_label.grid(row=0, column=0, sticky=tk.W)
+
+        self.screw_label = tk.Label(self, text=label_screw)
+        self.screw_label.grid(row=0, column=1, sticky=tk.E)
+
+        #creating the buttons for the servo
+        self.servo_button_open = tk.Button(self, text="OPEN")
+        self.servo_button_open.grid(row=1, column=0, sticky=tk.E + tk.W)
+
+        self.servo_button_neutral = tk.Button(self, text="NEUTRAL")
+        self.servo_button_neutral.grid(row=2, column=0, sticky=tk.E + tk.W)
+
+        self.servo_button_closed = tk.Button(self, text="CLOSED")
+        self.servo_button_closed.grid(row=3, column=0, sticky=tk.E + tk.W)
+
+
+        #creating buttons for screw
+
+        self.screw_button_up = tk.Button(self, text="UP")
+        self.screw_button_up.grid(row=1, column=1, sticky=tk.E + tk.W)
+
+        self.screw_button_down = tk.Button(self, text="DOWN")
+        self.screw_button_down.grid(row=2, column=1, sticky=tk.E + tk.W)
 
 
 class CustomFrame(tk.Frame):
