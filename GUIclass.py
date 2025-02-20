@@ -28,6 +28,9 @@ class GUI(tk.Tk):
         self.rowconfigure(0, weight=3)
         self.rowconfigure(1, weight=3)
 
+        # Bind close event to cleanup method
+        self.protocol("WM_DELETE_WINDOW", self.on_close)
+
     def frame_input(self, frame1, frame2, frame3):
         """
         This method adds the button frames created in main.py.
@@ -42,6 +45,12 @@ class GUI(tk.Tk):
     def start(self):
         """This method allows the starting of the GUI whenever construction is complete"""
         self.mainloop()
+
+    def on_close(self):
+        """Method executed when the GUI is closed"""
+        print("Performing cleanup before closing...")
+        GPIO.cleanup()
+        print("Closing GUI...")
 
 class MagFrame(tk.Frame):
     """
