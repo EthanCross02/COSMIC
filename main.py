@@ -1,6 +1,8 @@
 import GUIclass as gui
+#import MotorClass
+import time
 
-def makeGUI():
+def make_gui():
     # Create the GUI instance
     controller = gui.GUI("Motor Controller")
 
@@ -18,8 +20,9 @@ def makeGUI():
 def main():
 
     # Start the GUI
-    controller = makeGUI()
+    controller = make_gui()
     controller.start()
 
+    
 if __name__ == "__main__":
     main()
