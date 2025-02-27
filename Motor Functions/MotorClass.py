@@ -21,11 +21,11 @@ class Motor:
     It should be used as a parent class where other motors will be subclasses of 'Motor'.
     """
 
-    def __init__(self, out_pin1, out_pin2=None):
+    def __init__(self, out_pin1: int, out_pin2: int = None):
         """
         Constructor method to initialize the motor.
 
-        :param out_pin: GPIO pin number assigned to the motor output.
+        :param out_pin1: GPIO pin number assigned to the motor output.
         """
         self.output1 = out_pin1
         GPIO.setup(self.output1, GPIO.OUT)  # Configure pin as output
@@ -35,6 +35,16 @@ class Motor:
             GPIO.setup(self.output2, GPIO.OUT)
         else:
             self.output2 = None
+    def cleanup(self):
+        """Just in case we need specific motor cleanups"""
+        GPIO.cleanup(self.output1)
+        if self.output2 is not None:
+            GPIO.cleanup(self.output2)
 
+class DCMotor(Motor):
+    """This class will characterize the use of DC motors and initiate them as such"""
 
+    def __init__(self, out_pin1: int, out_pin2: int = None):
+        super().__init__(out_pin1, out_pin2)
+        ...
 
