@@ -82,7 +82,7 @@ class DCMotor(Motor):
         self.IN1 = in_pin1
         self.IN2 = in_pin2
 
-        self.pwm = GPIO.PWM(self.pwm_pin, 50)
+        self.pwm = GPIO.PWM(self.pwm_pin, 50)   #check to see if frequency is correct
         self.pwm.start(0)
 
     def move_forward(self, speed: int):
@@ -110,5 +110,39 @@ class Solenoid(Motor):
 
     def close(self):
         GPIO.output(self.control_pin, GPIO.LOW)
+
+class Stepper(Motor):
+    """Class to define stepper motors and initialize through motors"""
+    def __init__(self, step_pin: int, dir_pin: int):
+        super().__init__(step_pin, dir_pin)
+        self.step_pin = step_pin
+        self.dir_pin = dir_pin
+        self.position = 0
+
+    def move_motor(self, steps: int, delay: float=0.001):
+        """
+        This method will take an input for steps as a positive or negative number
+        and move the stepper in the direction indicated by the sign. The delay is also the speed
+        of the motor and is set by default if no other variable is passed. This will also keep track of the
+        position
+        """
+
+        if steps < 0:
+            GPIO.output(self.dir_pin, GPIO.HIGH)    #change this to low if you want to swap direction convention
+            self.position += steps
+            steps=steps*-1  #allows direction to be read directly from step numbering
+        else:
+            GPIO.output(self.dir_pin, GPIO.LOW)
+            self.position += steps
+        for i in range(steps):
+            GPIO.output(self.step_pin, GPIO.HIGH)
+            time.sleep(delay)
+            GPIO.output(self.step_pin, GPIO.LOW)
+            time.sleep(delay)
+
+        print(f"New position: {self.position}")
+
+
+
 
 

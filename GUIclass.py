@@ -7,6 +7,9 @@ and clarification
 """
 
 import tkinter as tk
+from tkinter import messagebox
+from MotorClass import Stepper
+
 
 class GUI(tk.Tk):
     """
@@ -48,15 +51,17 @@ class GUI(tk.Tk):
 
     def on_close(self):
         """Method executed when the GUI is closed"""
-        print("Performing cleanup before closing...")
-        GPIO.cleanup()
-        print("Closing GUI...")
+        if messagebox.askyesno("Quit", "Do you want to quit?"):
+            print("Performing cleanup before closing...")
+            GPIO.cleanup()
+            print("Closing GUI...")
+            self.destroy()
 
 class MagFrame(tk.Frame):
     """
     This class is used to construct the frame for the magazine control
     """
-    def __init__(self, master, label_servo, label_screw):
+    def __init__(self, master, label_servo, func_servo, label_screw, func_screw):
         super().__init__(master) #call parent constructor
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
@@ -95,14 +100,13 @@ class MagFrame(tk.Frame):
 class CustomFrame(tk.Frame):
     """This class is used to build the widget for each button frame used in the gui.
     It is a subclass of tkinter.Frame"""
-    def __init__(self, master, servo_name, pusher_name, solenoid_name, stepper_name):
+    def __init__(self, master, servo_name, func_servo, pusher_name, func_pusher, solenoid_name, func_solenoid, stepper_name, func_stepper):
         super().__init__(master) #call parent constructor
         """
         This method will initialize the CustomFrame object.
         As motor functions are created, custom methods to call the functions should
         be added for each of the button presses
         """
-
         #Creating the geometry for the button frames
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
@@ -110,16 +114,27 @@ class CustomFrame(tk.Frame):
         self.rowconfigure(1, weight=1)
 
         #Creating each button widget with the name passed from main.py
-        self.servo = tk.Button(self, text=servo_name)
+        self.servo = tk.Button(self, text=servo_name, command=func_servo)
         self.servo.grid(row=0, column=0, sticky=tk.W + tk.E)
 
-        self.pusher = tk.Button(self, text=pusher_name)
+        self.pusher = tk.Button(self, text=pusher_name, command=func_pusher)
         self.pusher.grid(row=0, column=1, sticky=tk.W + tk.E)
 
-        self.solenoid = tk.Button(self, text=solenoid_name)
+        self.solenoid = tk.Button(self, text=solenoid_name, command=func_solenoid)
         self.solenoid.grid(row=1, column=0, sticky=tk.W + tk.E)
 
-        self.stepper = tk.Button(self, text=stepper_name)
-        self.stepper.grid(row=1, column=1, sticky=tk.W + tk.E)
+        # Stepper motor text entry
+        self.stepper_entry = tk.Entry(self)
+        self.stepper_entry.grid(row=1, column=1, sticky=tk.W + tk.E)
+
+        # Stepper button
+        self.stepper = tk.Button(self, text=stepper_name, command=lambda: func_stepper(self.get_stepper_input()))
+        self.stepper.grid(row=2, column=1, sticky=tk.W + tk.E)
 
 
+    def get_stepper_input(self):
+        """Retrieve stepper input from the text box and convert to an integer."""
+        try:
+            return int(self.stepper_entry.get())
+        except ValueError:
+            return 0  # Default to 0 if input is invalid

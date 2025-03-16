@@ -1,27 +1,27 @@
 import GUIclass as gui
-#import MotorClass
+import MotorClass
 import time
-
-def make_gui():
-    # Create the GUI instance
-    controller = gui.GUI("Motor Controller")
-
-    #Create CustomFrame object for button frames
-    left_button = gui.CustomFrame(controller, "Servo Left", "Pusher Left", "Solenoid Left", "Stepper Left")
-    right_button = gui.CustomFrame(controller, "Servo Right", "Pusher Right", "Solenoid Right", "Stepper Right")
-    mag_button = gui.MagFrame(controller, "Servo", "Magazine")
-
-    # Add frames to the GUI
-    controller.frame_input(left_button, right_button, mag_button)
-
-    return controller
-
 
 def main():
 
-    # Start the GUI
-    controller = make_gui()
-    controller.start()
+    #initialize all motors
+
+    left_stepper = MotorClass.Stepper(None, None)
+    right_stepper = MotorClass.Stepper(None, None)
+
+    left_sol = MotorClass.Solenoid(None)
+    right_sol = MotorClass.Solenoid(None)
+
+    # DC Motors are not correct yet
+    #left_pusher = MotorClass.DCMotor(None, None)
+    #right_pusher = MotorClass.DCMotor(None, None)
+
+    left_servo = MotorClass.ServoMotor(None)
+    right_servo = MotorClass.ServoMotor(None)
+
+    mag_servo = MotorClass.ServoMotor(None)
+    #mag_screw = MotorClass.DCMotor(None, None)
+
 
     
 if __name__ == "__main__":
