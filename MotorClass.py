@@ -82,7 +82,7 @@ class DCMotor(Motor):
         self.IN2 = in_pin2
 
         self.pwm1 = GPIO.PWM(self.IN1, 50)   #check to see if frequency is correct
-        self.pwm2 = GPIO.PWM(self.IN1, 50)  # check to see if frequency is correct
+        self.pwm2 = GPIO.PWM(self.IN2, 50)  # check to see if frequency is correct
 
         self.pwm1.start(0)
         self.pwm2.start(0)
