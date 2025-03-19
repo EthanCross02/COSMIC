@@ -93,7 +93,7 @@ class DCMotor(Motor):
             self.pwm1.ChangeDutyCycle(0)
             self.pwm2.ChangeDutyCycle(speed)
             time.sleep(run_time)
-            self.stop()
+            self.stop_motor()
 
         else:
             self.pwm1.ChangeDutyCycle(speed)
