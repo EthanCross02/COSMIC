@@ -84,20 +84,19 @@ class DCMotor(Motor):
         self.pwm1 = GPIO.PWM(self.IN1, 50)   #check to see if frequency is correct
         self.pwm2 = GPIO.PWM(self.IN2, 50)  # check to see if frequency is correct
 
-        self.pwm1.start(None)
-        self.pwm2.start(None)
+
 
 
     def move_motor(self, speed: int, run_time: float):
         if speed < 0:
-            self.pwm1.ChangeDutyCycle(None)
-            self.pwm2.ChangeDutyCycle(speed)
+            speed = speed*-1
+
+            self.pwm2.start(speed)
             time.sleep(run_time)
             self.stop_motor()
 
         else:
-            self.pwm1.ChangeDutyCycle(speed)
-            self.pwm2.ChangeDutyCycle(None)
+            self.pwm1.start(speed)
             time.sleep(run_time)
             self.stop_motor()
 
