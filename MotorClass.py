@@ -96,7 +96,7 @@ class DCMotor(Motor):
             self.stop_motor()
 
         else:
-            self.pwm2.start()
+            self.pwm2.start(0)
             self.pwm1.start(speed)
             time.sleep(run_time)
             self.stop_motor()
