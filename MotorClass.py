@@ -90,12 +90,13 @@ class DCMotor(Motor):
     def move_motor(self, speed: int, run_time: float):
         if speed < 0:
             speed = speed*-1
-
+            self.pwm1.start(0)
             self.pwm2.start(speed)
             time.sleep(run_time)
             self.stop_motor()
 
         else:
+            self.pwm2.start()
             self.pwm1.start(speed)
             time.sleep(run_time)
             self.stop_motor()
