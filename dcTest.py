@@ -6,8 +6,10 @@ def main():
     try:
 
         motor = MotorClass.DCMotor(38, 40)
-        print('Motor is moving')
+        print('Motor is moving backwards')
         motor.move_motor(-20, 5.0)
+        print('Motor is moving forwards')
+        motor.move_motor(80, 5.0)
         print('Motor is stopped')
         '''
         pin1 = 38
