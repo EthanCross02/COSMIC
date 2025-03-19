@@ -76,29 +76,34 @@ class ServoMotor(Motor):
 
 class DCMotor(Motor):
     """Class that will define how DC motors will behave"""
-    def __init__(self, in_pin1: int, in_pin2: int, pwm_pin:int ):
-        super().__init__(in_pin1, in_pin2, pwm_pin)
-        self.pwm_pin = pwm_pin
+    def __init__(self, in_pin1: int, in_pin2: int):
+        super().__init__(in_pin1, in_pin2)
         self.IN1 = in_pin1
         self.IN2 = in_pin2
 
-        self.pwm = GPIO.PWM(self.pwm_pin, 50)   #check to see if frequency is correct
-        self.pwm.start(0)
+        self.pwm1 = GPIO.PWM(self.IN1, 50)   #check to see if frequency is correct
+        self.pwm2 = GPIO.PWM(self.IN1, 50)  # check to see if frequency is correct
 
-    def move_forward(self, speed: int):
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        self.pwm.ChangeDutyCycle(speed)
+        self.pwm1.start(0)
+        self.pwm2.start(0)
 
-    def move_back(self, speed: int):
-        GPIO.output(self.IN2, GPIO.HIGH)
-        GPIO.output(self.IN1, GPIO.LOW)
-        self.pwm.ChangeDutyCycle(speed)
+
+    def move_motor(self, speed: int, run_time: float):
+        if speed < 0:
+            self.pwm1.ChangeDutyCycle(0)
+            self.pwm2.ChangeDutyCycle(speed)
+            time.sleep(run_time)
+            self.stop()
+
+        else:
+            self.pwm1.ChangeDutyCycle(speed)
+            self.pwm2.ChangeDutyCycle(0)
+            time.sleep(run_time)
+            self.stop()
 
     def stop(self):
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.LOW)
-        self.pwm.ChangeDutyCycle(0)
+        self.pwm1.ChangeDutyCycle(0)
+        self.pwm2.ChangeDutyCycle(0)
 
 class Solenoid(Motor):
     def __init__(self, out_pin: int):
