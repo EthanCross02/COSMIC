@@ -4,9 +4,11 @@ import time
 
 def main():
     try:
-        '''
+
         motor = MotorClass.DCMotor(38, 40)
+        print('Motor is moving')
         motor.move_motor(-20, 5.0)
+        print('Motor is stopped')
         '''
         pin1 = 38
         pin2 = 40
@@ -22,6 +24,7 @@ def main():
         print('Motor is moving\n')
         time.sleep(5)
         print("Motor has stopped\n")
+        '''
     finally:
         GPIO.cleanup()
         print("Pins are clean\n")
