@@ -99,11 +99,11 @@ class DCMotor(Motor):
             self.pwm1.ChangeDutyCycle(speed)
             self.pwm2.ChangeDutyCycle(0)
             time.sleep(run_time)
-            self.stop()
+            self.stop_motor()
 
-    def stop(self):
-        self.pwm1.ChangeDutyCycle(0)
-        self.pwm2.ChangeDutyCycle(0)
+    def stop_motor(self):
+        self.pwm1.stop()
+        self.pwm2.stop()
 
 class Solenoid(Motor):
     def __init__(self, out_pin: int):
