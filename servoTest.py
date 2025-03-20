@@ -22,6 +22,8 @@ def main():
         time.sleep(5)
         servo.ChangeDutyCycle(12.5)
         print("Servo Should have moved")
+        time.sleep(5)
+        servo.stop()
     finally:
         GPIO.cleanup()
         print('Pins are cleaned')
