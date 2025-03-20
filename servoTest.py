@@ -12,14 +12,14 @@ def main():
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(40, GPIO.OUT)
-        servo = GPIO.PWM(40, 250)
-        servo.ChangeDutyCycle(30)
+        servo = GPIO.PWM(40, 100)
+        servo.ChangeDutyCycle(10)
         print("Servo Should have moved")
         time.sleep(5)
-        servo.ChangeDutyCycle(0)
+        servo.ChangeDutyCycle(20)
         print("Servo Should have moved")
         time.sleep(5)
-        servo.ChangeDutyCycle(60)
+        servo.ChangeDutyCycle(15)
         print("Servo Should have moved")
     finally:
         GPIO.cleanup()
