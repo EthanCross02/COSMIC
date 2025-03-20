@@ -12,7 +12,7 @@ def main():
 
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(40, GPIO.OUT)
-        servo = GPIO.PWM(40, 50)
+        servo = GPIO.PWM(40, 100)
         servo.start(15)
         print("Servo Should have moved")
         time.sleep(5)
