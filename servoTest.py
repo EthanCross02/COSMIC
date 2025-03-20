@@ -14,6 +14,7 @@ def main():
         GPIO.setup(40, GPIO.OUT)
         servo = GPIO.PWM(40, 100)
         servo.ChangeDutyCycle(2.5)
+        servo.start(7.5)
         print("Servo Should have moved")
         time.sleep(5)
         servo.ChangeDutyCycle(7.5)
