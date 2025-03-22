@@ -133,11 +133,11 @@ class Stepper(Motor):
         """
 
         if steps < 0:
-            GPIO.output(self.dir_pin, GPIO.HIGH)    #change this to low if you want to swap direction convention
+            GPIO.output(self.dir_pin, GPIO.LOW)    #change this to low if you want to swap direction convention
             self.position += steps
             steps=steps*-1  #allows direction to be read directly from step numbering
         else:
-            GPIO.output(self.dir_pin, GPIO.LOW)
+            GPIO.output(self.dir_pin, GPIO.HIGH)
             self.position += steps
         for i in range(steps):
             GPIO.output(self.step_pin, GPIO.HIGH)
