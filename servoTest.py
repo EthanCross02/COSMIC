@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 def main():
     try:
-        servo = MotorClass.ServoMotor(40)
+        servo = MotorClass.ServoMotor(12)
 
         while True:
             position: int = int(input("Please enter the position of servo: "))
