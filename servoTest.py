@@ -13,6 +13,7 @@ def main():
     finally:
         GPIO.cleanup()
         print('\nPins are cleaned\n')
+        #test
 
 if __name__ == '__main__':
     main()
