@@ -71,7 +71,7 @@ class ServoMotor(Motor):
         super().__init__(pwm_pin)
         self.pwm_pin = pwm_pin
         self.pwm = GPIO.PWM(self.pwm_pin, SERVO_FREQ)
-        self.pwm.start(NEUTRAL)
+        self.pwm.start(100)
 
     def change_pos(self, position: int):
         """Method to change the position of as servo"""
