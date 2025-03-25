@@ -80,6 +80,7 @@ class ServoMotor(Motor):
         state = (Pulse_width*(SERVO_FREQ/1000000))*100
         print(state)
         self.pwm.ChangeDutyCycle(state)
+        time.sleep(0.1)
 
     def clean(self):
         self.pwm.stop()
