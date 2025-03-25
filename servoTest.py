@@ -13,6 +13,7 @@ def main():
         print("Maximum")
         time.sleep(3)
         servo.change_pos(50)
+        time.sleep(3)
         print("Neutral")
 
         '''
