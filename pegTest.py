@@ -10,9 +10,9 @@ def main():
             dir = input('Direction? (f/b): ').lower().strip() == 'f'
             run_time = float(input('Run time? (s): '))
             if dir == True:
-                motor.move_motor(10,run_time)
+                motor.move_motor(50,run_time)
             else:
-                motor.move_motor(-10,run_time)
+                motor.move_motor(-50,run_time)
             isSure = input('Again? (y/n): ').lower().strip() == 'y'
 
     finally:
