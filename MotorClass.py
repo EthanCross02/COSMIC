@@ -18,7 +18,8 @@ import time
 
 NEUTRAL: Final[int] = 0 #this is an assumption on servo neutral position
 SPEED: Final[int] = ...
-
+SERVO_FREQ: Final[int] = 100
+SERVO_PW: Final[int] = ...      #in microseconds
 GPIO.setmode(GPIO.BOARD)
 
 def servo_setting(position: str) -> int:
@@ -66,13 +67,19 @@ class ServoMotor(Motor):
     def __init__(self, pwm_pin: int):
         super().__init__(pwm_pin)
         self.pwm_pin = pwm_pin
-        self.pwm = GPIO.PWM(self.pwm_pin, 50)
+        self.pwm = GPIO.PWM(self.pwm_pin, SERVO_FREQ)
         self.pwm.start(NEUTRAL)
 
-    def change_pos(self, position: str):
+    def change_pos(self, position: int):
         """Method to change the position of as servo"""
-        state = servo_setting(position)
+        #state = servo_setting(position)
+        Pulse_width = ((position/100)*2000)+500
+        state = (Pulse_width*SERVO_FREQ)
         self.pwm.ChangeDutyCycle(state)
+
+    def clean(self):
+        self.stop()
+        GPIO.cleanup(self.pwm_pin)
 
 class DCMotor(Motor):
     """Class that will define how DC motors will behave"""
