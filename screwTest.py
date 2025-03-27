@@ -9,7 +9,7 @@ def main():
         while isSure == True:
             dir = input('Direction? (f/b): ').lower().strip() == 'f'
             run_time = float(input('Run time? (s): '))
-            speed = float(input('Speed? (%): '))
+            speed = int(input('Speed? (%): '))
             if dir == True:
                 motor.move_motor(speed,run_time)
             else:
