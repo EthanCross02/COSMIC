@@ -10,12 +10,14 @@ def main():
     try:
 
         stepper = MotorClass.Stepper(38, 40)
-        stepper.move_motor(100)
-        time.sleep(1)
-        stepper.move_motor(-100)
+        isSure = True
+        while isSure == True:
+            steps = int(input("Enter Steps: "))
+            stepper.move_motor(steps)
+            isSure = input('Again? (y/n): ').lower().strip() == 'y'
     finally:
         GPIO.cleanup()
-        print("Pins are clean")
+        print("Pins are clean\n")
 
 if __name__ == "__main__":
     main()
