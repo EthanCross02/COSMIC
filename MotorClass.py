@@ -136,7 +136,7 @@ class Stepper(Motor):
         self.dir_pin = dir_pin
         self.position = 0
 
-    def move_motor(self, steps: int, delay: float=0.1):
+    def move_motor(self, steps: int, delay: float=0.003):
         """
         This method will take an input for steps as a positive or negative number
         and move the stepper in the direction indicated by the sign. The delay is also the speed
