@@ -136,14 +136,14 @@ class Stepper(Motor):
         self.dir_pin = dir_pin
         self.position = 0
 
-    def move_motor(self, steps: int, delay: float=0.003):
+    def move_motor(self, steps: int, delay: float=0.01):
         """
         This method will take an input for steps as a positive or negative number
         and move the stepper in the direction indicated by the sign. The delay is also the speed
         of the motor and is set by default if no other variable is passed. This will also keep track of the
         position
         """
-
+        GPIO.output(self.step_pin, GPIO.HIGH)
         if steps < 0:
             GPIO.output(self.dir_pin, GPIO.HIGH)    #change this to low if you want to swap direction convention
             self.position += steps
