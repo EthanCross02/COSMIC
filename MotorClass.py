@@ -22,7 +22,7 @@ SERVO_FREQ: Final[int] = 200
 SERVO_MIN: Final[float] = 500      #in microseconds
 SERVO_MAX: Final[float] = 2.5e3      #in microseconds
 
-SMALL_MIN = Final[float] = 1e-3       #in seconds
+SMALL_MIN: Final[float] = 1e-3       #in seconds
 SMALL_MAX: Final[float] = 4e-3          # seconds
 SMALL_FREQ: Final[int] = SERVO_FREQ        # Hz
 
@@ -187,3 +187,8 @@ class SmallServo(ServoMotor):
 
 
 
+def test():
+    servo = SmallServo(12)
+
+if __name__ == '__main__':
+    test()
