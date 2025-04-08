@@ -5,10 +5,12 @@ import RPi.GPIO as GPIO
 def small(servo):
     while True:
         Open_close = input('Open or Close? (o/c): ').lower().strip() == 'o'
-        if Open_close == 'o':
+        if Open_close == True:
             servo.change_pos(25)
+            print('Open')
         else:
             servo.change_pos(15)
+            print("Closed")
 
 def big(servo):
     while True:
@@ -22,7 +24,7 @@ def main():
             servo = MotorClass.SmallServo(12)
             small(servo)
         else:
-            servo = MotorClass.ServoMotor(13)
+            servo = MotorClass.ServoMotor(12)
             big(servo)
 
 
