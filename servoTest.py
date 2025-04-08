@@ -2,16 +2,29 @@ import MotorClass
 import time
 import RPi.GPIO as GPIO
 
+def small(servo):
+    while True:
+        Open_close = input('Open or Close? (o/c): ').lower().strip() == 'o'
+        if Open_close == 'o':
+            servo.change_pos(25)
+        else:
+            servo.change_pos(15)
+
+def big(servo):
+    while True:
+        position = input('Enter Position: ')
+        servo.change_pos(position)
+
 def main():
     try:
-        small = input('Small? (y/n): ').lower().strip() == 'y'
-        if small == True:
+        small_sel = input('Small? (y/n): ').lower().strip() == 'y'
+        if small_sel == True:
             servo = MotorClass.SmallServo(12)
+            small(servo)
         else:
             servo = MotorClass.ServoMotor(13)
-        while True:
-            position: int = int(input("Please enter the position of servo: "))
-            servo.change_pos(position)
+            big(servo)
+
 
     finally:
         GPIO.cleanup()
