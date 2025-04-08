@@ -17,10 +17,14 @@ from typing import Final
 import time
 
 NEUTRAL: Final[int] = 0 #this is an assumption on servo neutral position
-SPEED: Final[int] = ...
+
 SERVO_FREQ: Final[int] = 200
-SERVO_MIN: Final[int] = 500      #in microseconds
-SERVO_MAX: Final[int] = 2500      #in microseconds
+SERVO_MIN: Final[float] = 500      #in microseconds
+SERVO_MAX: Final[float] = 2.5e3      #in microseconds
+
+SMALL_MIN = Final[float] = 1e-3       #in seconds
+SMALL_MAX: Final[float] = 4e-3          # seconds
+SMALL_FREQ: Final[int] = SERVO_FREQ        # Hz
 
 
 GPIO.setmode(GPIO.BOARD)
@@ -78,7 +82,7 @@ class ServoMotor(Motor):
         #state = servo_setting(position)
         Pulse_width = ((position/100)*2000)+500
         state = (Pulse_width*(SERVO_FREQ/1000000))*100
-        print(state)
+        #print(state)
         self.pwm.ChangeDutyCycle(state)
         time.sleep(0.1)
 
@@ -161,6 +165,24 @@ class Stepper(Motor):
 
         print(f"New position: {self.position}")
 
+class SmallServo(ServoMotor):
+
+    def __init__(self, pwm_pin: int):
+        super().__init__(pwm_pin)
+        self.pwm_pin = pwm_pin
+
+    def change_pos(self, position: int):
+        """Method to change the position of as servo"""
+        #state = servo_setting(position)
+        Pulse_width = SMALL_MIN + (position/100)*(SMALL_MAX-SMALL_MIN)
+        state = Pulse_width*SMALL_FREQ*100
+        #print(state)
+        self.pwm.ChangeDutyCycle(state)
+        time.sleep(0.1)
+
+    def clean(self):
+        self.pwm.stop()
+        GPIO.cleanup(self.pwm_pin)
 
 
 
