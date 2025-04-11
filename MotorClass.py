@@ -176,16 +176,16 @@ class SmallServo(ServoMotor):
     def __init__(self, pwm_pin: int):
         super().__init__(pwm_pin)
         self.pwm_pin = pwm_pin
-        self.position = 15
-        self.change_pos(15)
+        self.position = 10
+        self.change_pos(10)
 
     def open_close(self):
-        if self.position == 15:
-            self.change_pos(25)
-            self.position = 25
-        if self.position == 25:
-            self.change_pos(15)
-            self.position = 25
+        if self.position == 10:
+            self.change_pos(20)
+            self.position = 20
+        if self.position == 20:
+            self.change_pos(10)
+            self.position = 10
 
     def change_pos(self, position: int):
         """Method to change the position of as servo"""
