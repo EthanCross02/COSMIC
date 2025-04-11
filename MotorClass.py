@@ -69,6 +69,15 @@ class Motor:
         else:
             self.output3 = None
 
+    def clean(self):
+        GPIO.output(self.output1, GPIO.LOW)
+        if self.output2 is not None:
+            GPIO.output(self.output2, GPIO.LOW)
+        if self.output3 is not None:
+            GPIO.output(self.output3, GPIO.LOW)
+
+
+
 class ServoMotor(Motor):
     def __init__(self, pwm_pin: int):
         super().__init__(pwm_pin)
@@ -98,8 +107,6 @@ class DCMotor(Motor):
 
         self.pwm1 = GPIO.PWM(self.IN1, 50)   #check to see if frequency is correct
         self.pwm2 = GPIO.PWM(self.IN2, 50)  # check to see if frequency is correct
-
-
 
 
     def move_motor(self, speed: int, run_time: float):
@@ -169,6 +176,16 @@ class SmallServo(ServoMotor):
     def __init__(self, pwm_pin: int):
         super().__init__(pwm_pin)
         self.pwm_pin = pwm_pin
+        self.position = 15
+        self.change_pos(15)
+
+    def open_close(self):
+        if self.position == 15:
+            self.change_pos(25)
+            self.position = 25
+        if self.position == 25:
+            self.change_pos(15)
+            self.position = 25
 
     def change_pos(self, position: int):
         """Method to change the position of as servo"""
@@ -182,12 +199,3 @@ class SmallServo(ServoMotor):
     def clean(self):
         self.pwm.stop()
         GPIO.cleanup(self.pwm_pin)
-
-
-
-
-def test():
-    servo = SmallServo(12)
-
-if __name__ == '__main__':
-    test()
