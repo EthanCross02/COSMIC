@@ -18,7 +18,8 @@ def wait():
 def main():
     try:
         speed = int(input('Speed: '))
-        LEFT_TRAY.move_motor(speed)
+        time = int(input('Time: '))
+        LEFT_TRAY.move_motor(speed, time)
         wait()
         pos = int(input('Position: '))
         LEFT_ELEVATOR.change_pos(pos)
@@ -29,7 +30,8 @@ def main():
         LEFT_ELEVATOR.change_pos(pos)
         wait()
         speed = int(input('Speed: '))
-        LEFT_TRAY.move_motor(speed)
+        time = int(input('Time: '))
+        LEFT_TRAY.move_motor(speed, time)
         wait()
         pos = int(input('Position: '))
         LEFT_ELEVATOR.change_pos(pos)
