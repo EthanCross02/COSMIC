@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 
 LEFT_STEP = MotorClass.Stepper(38, 40)
 LEFT_FLANGE = MotorClass.SmallServo(32)
-LEFT_ELEVATOR = MotorClass.ServoMotor(28)
+LEFT_ELEVATOR = MotorClass.ServoMotor(26)
 
 # Left Node Magazine
 LEFT_TRAY = MotorClass.DCMotor(35, 37)
@@ -36,3 +36,4 @@ def main():
 
     finally:
         GPIO.cleanup()
+        print("Pins are cleaned")
