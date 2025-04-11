@@ -37,3 +37,6 @@ def main():
     finally:
         GPIO.cleanup()
         print("Pins are cleaned")
+
+if __name__ == '__main__':
+    main()
