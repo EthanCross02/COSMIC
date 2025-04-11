@@ -13,7 +13,8 @@ def main():
         isSure = True
         while isSure == True:
             steps = int(input("Enter Steps: "))
-            stepper.move_motor(steps)
+            delay = float(input("Enter Delay: "))
+            stepper.move_motor(steps, delay)
             isSure = input('Again? (y/n): ').lower().strip() == 'y'
     finally:
         GPIO.cleanup()

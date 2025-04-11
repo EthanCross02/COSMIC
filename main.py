@@ -1,6 +1,12 @@
 import GUIclass as gui
 import MotorClass
 import time
+def wait():
+    cont = input('Continue? (y/n): ').lower().strip() == 'y'
+    if cont == True:
+        return
+    if cont == False:
+
 
 def main():
 

@@ -10,7 +10,6 @@ The plan should be to create a master class that is 'Motor' that will house the 
 input and output variables so that we do not have to continue to reinitialize the class.
 All other motor classes can be created as a subclass of 'Motor'.
 """
-from unittest import case
 
 import RPi.GPIO as GPIO
 from typing import Final
