@@ -28,18 +28,6 @@ SMALL_FREQ: Final[int] = SERVO_FREQ        # Hz
 
 GPIO.setmode(GPIO.BOARD)
 
-def servo_setting(position: str) -> int:
-    """Function that will be called to for servo settings"""
-    match position:
-        case "UP":
-            return 90
-        case "DOWN":
-            return -90
-        case "CENTER":
-            return 0
-        case _:  # Default case (handles invalid input)
-            raise ValueError(f"Invalid position: {position}")
-
 
 class Motor:
     """
