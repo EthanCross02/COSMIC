@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 def main():
     try:
 
-        stepper = MotorClass.Stepper(38, 40)
+        stepper = MotorClass.Stepper(11, 13)
         isSure = True
         while isSure == True:
             steps = int(input("Enter Steps: "))
