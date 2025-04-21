@@ -183,12 +183,12 @@ class SmallServo(ServoMotor):
         if difference < 0:
             for i in range(abs(difference)):
                 self.step_up(current_pos-i)
-                time.sleep(0.3)
+                time.sleep(0.1)
                 self.position = current_pos-i
         if difference > 0:
             for i in range(abs(difference)):
                 self.step_up(current_pos+i)
-                time.sleep(0.3)
+                time.sleep(0.1)
                 self.position = current_pos+i
 
     def step_up(self, position):
