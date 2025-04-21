@@ -164,8 +164,8 @@ class SmallServo(ServoMotor):
     def __init__(self, pwm_pin: int):
         super().__init__(pwm_pin)
         self.pwm_pin = pwm_pin
-        self.position = 10
-        self.change_pos(10)
+        self.position = 15
+        self.change_pos(15)
 
     def open_close(self):
         if self.position == 10:
@@ -177,13 +177,27 @@ class SmallServo(ServoMotor):
 
     def change_pos(self, position: int):
         """Method to change the position of as servo"""
-        #state = servo_setting(position)
-        Pulse_width = SMALL_MIN + (position/100)*(SMALL_MAX-SMALL_MIN)
-        state = Pulse_width*SMALL_FREQ*100
-        #print(state)
+        current_pos = self.position
+        new_pos = position
+        difference = new_pos - current_pos
+        if difference < 0:
+            for i in range(abs(difference)):
+                self.step_up(current_pos-i)
+                time.sleep(0.3)
+                self.position = current_pos-i
+        if difference > 0:
+            for i in range(abs(difference)):
+                self.step_up(current_pos+i)
+                time.sleep(0.3)
+                self.position = current_pos+i
+
+    def step_up(self, position):
+        # state = servo_setting(position)
+        Pulse_width = SMALL_MIN + (position / 100) * (SMALL_MAX - SMALL_MIN)
+        state = Pulse_width * SMALL_FREQ * 100
+        # print(state)
         self.pwm.ChangeDutyCycle(state)
         time.sleep(0.1)
-
     def clean(self):
         self.pwm.stop()
         GPIO.cleanup(self.pwm_pin)
