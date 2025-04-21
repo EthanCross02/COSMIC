@@ -73,7 +73,24 @@ class ServoMotor(Motor):
         self.pwm = GPIO.PWM(self.pwm_pin, SERVO_FREQ)
         self.pwm.start(100)
 
+
     def change_pos(self, position: int):
+        """Method to change the position of as servo"""
+        current_pos = self.position
+        new_pos = position
+        difference = new_pos - current_pos
+        if difference < 0:
+            for i in range(abs(difference)):
+                self.step_up(current_pos-i)
+                time.sleep(0.1)
+                self.position = current_pos-i
+        if difference > 0:
+            for i in range(abs(difference)):
+                self.step_up(current_pos+i)
+                time.sleep(0.1)
+                self.position = current_pos+i
+
+    def step_up(self, position: int):
         """Method to change the position of as servo"""
         #state = servo_setting(position)
         Pulse_width = ((position/100)*2000)+500
